@@ -90,8 +90,18 @@
     });
     el.querySelector('.rp-go').onclick = function () {
       if (!pick) { err.textContent = 'Pick a task first'; return; }
-      var t = tasks.filter(function (x) { return x.i === pick.dataset.id; })[0];
-      sendPrompt('Resume the 🔥 task "' + t.c.replace(/^🔥\s*/, '') + '" (Todoist id ' + t.i + ').');
+      resume(tasks.filter(function (x) { return x.i === pick.dataset.id; })[0]);
     };
+  };
+
+  function resume(t) { sendPrompt('Resume the 🔥 task "' + t.c.replace(/^🔥\s*/, '') + '" (Todoist id ' + t.i + ').'); }
+
+  /* Single resume button for one task, shown in the chat that owns it.
+     Usage: renderResumeButton(el, {i:id, c:content}) */
+  window.renderResumeButton = function (el, t) {
+    el.innerHTML = '<div style="display:flex;align-items:center;gap:12px;padding:0.5rem 0;flex-wrap:wrap">' +
+      '<button class="rb-go">Resume this task ↗</button>' +
+      '<span style="font-size:13px;color:var(--text-secondary);min-width:0">' + esc(t.c) + '</span></div>';
+    el.querySelector('.rb-go').onclick = function () { resume(t); };
   };
 })();

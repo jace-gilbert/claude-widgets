@@ -13,3 +13,5 @@ A Todoist-style picker for open Resume 🔥 tasks, used by the `resume-task` ski
 ```
 
 Pin a commit SHA in the URL, so editing this file never changes a picker until the skill is updated to the new SHA. The data format is documented at the top of the file.
+
+`renderResumeButton(el, {i, c})` draws just the **Resume this task ↗** button for one task. The skill shows it in the chat whenever it creates or updates that chat's 🔥 task.
